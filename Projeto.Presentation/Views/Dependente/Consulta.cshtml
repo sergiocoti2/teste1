@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Consulta</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body class="container">
+    <div> 
+
+        <h1>Consulta de Dependentes</h1>
+        <a href="/Home/Index">Página inicial</a>
+        <hr/>
+
+        @model List<Projeto.Presentation.Models.DependenteConsultaViewModel>
+
+        <div>
+            @ViewBag.Mensagem
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome do Dependente</th>
+                    <th>Data Nasc</th>
+                    <th>Funcionario</th>
+                    <th>Salario</th>
+                    <th>Data Admissão</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var d in Model)
+                {
+                    <tr>
+                        <td>@d.IdDependente</td>
+                        <td>@d.Nome</td>
+                        <td>@d.DataNascimento.ToString("dd/MM/yyyy")</td>
+                        <td>@d.NomeFuncionario</td>
+                        <td>@d.Salario.ToString("c")</td>
+                        <td>@d.DataAdmissao.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <a href="/Dependente/Exclusao?id=@d.IdDependente" 
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Deseja excluir este Dependente?');">Excluir</a>
+
+                            <a href="/Dependente/Edicao?id=@d.IdDependente" 
+                               class="btn btn-primary btn-sm">Atualizar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        Quantidade de registros: @Model.Count
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</body>
+</html>

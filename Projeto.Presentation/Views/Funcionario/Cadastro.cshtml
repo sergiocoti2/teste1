@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body class="container">
+    <div> 
+
+        <h1>Cadastro de Funcionários</h1>
+        <a href="/Home/Index">Página inicial</a>
+        <hr/>
+
+        <!-- definir a classe de modelo -->
+        @model Projeto.Presentation.Models.FuncionarioCadastroViewModel
+
+        <!-- criando o formulário -->
+        @using (Html.BeginForm())
+        {
+            <label>Nome do Funcionário:</label> <br/>
+            @Html.TextBoxFor(model => model.Nome, 
+                new { @class = "form-control col-md-4" })
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+            <br />
+
+            <label>Salario:</label> <br />
+            @Html.TextBoxFor(model => model.Salario,
+                new { @class = "form-control col-md-4" })
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.Salario)
+            </div>
+            <br />
+
+            <label>Data de Admissão:</label> <br />
+            @Html.TextBoxFor(model => model.DataAdmissao,
+                new { @class = "form-control col-md-4" })
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.DataAdmissao)
+            </div>
+            <br />
+
+            <input type="submit" value="Cadastrar Funcionário"
+                   class="btn btn-success"/>
+            <br />
+            <br />
+
+            <div>
+                @ViewBag.Mensagem
+            </div>            
+        }
+
+    </div>
+</body>
+</html>

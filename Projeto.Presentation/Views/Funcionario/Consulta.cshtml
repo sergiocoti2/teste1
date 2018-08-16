@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Consulta</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body class="container">
+    <div> 
+
+        <h1>Consulta de Funcionários</h1>
+        <a href="/Home/Index">Página inicial</a>
+        <hr/>
+
+        <!-- classe de modelo -->
+        @model List<Projeto.Presentation.Models.FuncionarioConsultaViewModel>
+
+        <div>
+            @ViewBag.Mensagem
+        </div>
+
+        <table style="width: 100%" border="1" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome do Funcionário</th>
+                    <th>Salário</th>
+                    <th>Data de Admissão</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var f in Model)
+                {
+                    <tr>
+                        <td>@f.IdFuncionario</td>
+                        <td>@f.Nome</td>
+                        <td>@f.Salario.ToString("c")</td>
+                        <td>@f.DataAdmissao.ToString("dd/MM/yyyy")</td>
+                        <td>
+
+                            <a href="/Funcionario/Exclusao?id=@f.IdFuncionario"
+                               onclick="return confirm('Deseja excluir este funcionário?');"
+                               class="btn btn-danger btn-sm">
+                                Excluir
+                            </a>
+
+                            <a href="/Funcionario/Edicao?id=@f.IdFuncionario"
+                               class="btn btn-primary btn-sm">
+                                Atualizar
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        Quantidade de Funcionários: @Model.Count
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</body>
+</html>

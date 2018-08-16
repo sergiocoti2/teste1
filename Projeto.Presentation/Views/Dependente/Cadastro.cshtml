@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body class="container">
+    <div> 
+
+        <h1>Cadastro de Dependentes</h1>
+        <a href="/Home/Index">Página inicial</a>
+        <hr/>
+
+        @model Projeto.Presentation.Models.DependenteCadastroViewModel
+
+        @using (Html.BeginForm())
+        {
+            <label>Nome do Dependente:</label>
+            @Html.TextBoxFor(model => model.Nome,
+                    new { @class = "form-control col-md-4" })
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+            <br/>
+
+            <label>Data de Nascimento:</label>
+            @Html.TextBoxFor(model => model.DataNascimento,
+                    new { @class = "form-control col-md-4" })
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.DataNascimento)
+            </div>
+            <br />
+
+            <label>Selecione o Funcionário:</label>
+            @Html.DropDownListFor(model => model.IdFuncionario,
+                                  Model.ListagemDeFuncionarios,
+                                  "- Selecione uma opção -",
+                                  new { @class = "form-control col-md-4" })
+            <div class="text-danger">
+                @Html.ValidationMessageFor(model => model.IdFuncionario)
+            </div>
+            <br/>
+
+            <input type="submit" value="Cadastrar Dependente"
+                   class="btn btn-success"/>
+            <br />
+            <br />
+
+            @ViewBag.Mensagem
+        }
+
+    </div>
+</body>
+</html>
